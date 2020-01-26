@@ -2,11 +2,13 @@ import * as React from 'react'
 import { TrelloListProps } from '../interface/props'
 import TrelloCard from './TrelloCard'
 
-const TrelloList: React.FC<TrelloListProps> = ({ title }) => {
+const TrelloList: React.FC<TrelloListProps> = ({ title, cards }) => {
   return (
     <div style={styles.container}>
       <h4>{title}</h4>
-      <TrelloCard />
+      {cards.map(card => (
+        <TrelloCard text={card.text} />
+      ))}
     </div>
   )
 }
