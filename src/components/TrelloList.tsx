@@ -21,7 +21,8 @@ const styles = {
     borderRadius: 3,
     width: 300,
     padding: 8,
-    margin: 8
+    margin: 8,
+    height: '100%'
   }
 }
 

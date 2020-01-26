@@ -1,6 +1,7 @@
 import * as React from 'react'
 import Icon from '@material-ui/core/Icon'
 import Card from '@material-ui/core/Card'
+import Button from '@material-ui/core/Button'
 import Textarea from 'react-textarea-autosize'
 
 class TrelloActionButton extends React.Component<{ list?: boolean }> {
@@ -43,7 +44,7 @@ class TrelloActionButton extends React.Component<{ list?: boolean }> {
         */
         onClick={this.openForm}
         style={{
-          ...styles.openForButtonGroup,
+          ...styles.openFormButtonGroup,
           opacity: buttonTextOpacity,
           color: buttonTextColor,
           backgroundColor: buttonTextBackground
@@ -65,15 +66,47 @@ class TrelloActionButton extends React.Component<{ list?: boolean }> {
     const buttonTitle = list ? 'Add List' : 'Add Card'
     return (
       <div>
-        <Card>
+        <Card
+          style={{
+            overflow: 'visivle',
+            minHeight: 80,
+            minWidth: 272,
+            padding: '6px 8px 2px'
+          }}
+        >
           <Textarea
             placeholder={placeholder}
             autoFocus
             onBlur={this.closeForm}
             value={this.state.text}
             onChange={this.handleInputChange}
+            style={{
+              resize: 'none',
+              width: '100%',
+              outline: 'none',
+              border: 'none'
+            }}
           />
         </Card>
+        <div style={styles.formButtonGroup}>
+          <Button
+            variant="contained"
+            style={{
+              color: 'white',
+              backgroundColor: '#5aac44'
+            }}
+          >
+            {buttonTitle}{' '}
+          </Button>
+          <Icon
+            style={{
+              marginLeft: 8,
+              cursor: 'pointer'
+            }}
+          >
+            close
+          </Icon>
+        </div>
       </div>
     )
   }
@@ -84,14 +117,20 @@ class TrelloActionButton extends React.Component<{ list?: boolean }> {
 }
 
 const styles = {
-  openForButtonGroup: {
+  openFormButtonGroup: {
     display: 'flex',
     alignItems: 'center',
     cursor: 'pointer',
     borderRadius: 3,
     height: 36,
     width: 272,
-    paddingLeft: 10
+    paddingLeft: 10,
+    marginTop: 8
+  },
+  formButtonGroup: {
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: 8,
   }
 }
 
