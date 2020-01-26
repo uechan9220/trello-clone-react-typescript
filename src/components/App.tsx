@@ -12,10 +12,11 @@ class App extends React.Component<{ lists: [] }> {
         <div style={styles.listsContainer}>
           {lists.map(
             (list: {
+              id: number
               title: string
               cards: [{ id: number; text: string }]
             }) => (
-              <TrelloList title={list.title} cards={list.cards} />
+              <TrelloList key={list.id} title={list.title} cards={list.cards} />
             )
           )}
         </div>
@@ -26,7 +27,7 @@ class App extends React.Component<{ lists: [] }> {
 
 const styles = {
   listsContainer: {
-    display: 'flex'
+    display: 'flex',
   }
 }
 
