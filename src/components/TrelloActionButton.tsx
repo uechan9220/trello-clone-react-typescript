@@ -5,8 +5,13 @@ import Button from '@material-ui/core/Button'
 import Textarea from 'react-textarea-autosize'
 import { connect } from 'react-redux'
 import { addList } from '../actions/listsActions'
+import { addCard } from '../actions/cardsActions'
 
-class TrelloActionButton extends React.Component<{ list?: boolean, dispatch: any }> {
+class TrelloActionButton extends React.Component<{
+  list?: boolean
+  dispatch: any
+  listID?: number
+}> {
   state = {
     formOpen: false,
     text: ''
@@ -24,7 +29,7 @@ class TrelloActionButton extends React.Component<{ list?: boolean, dispatch: any
     })
   }
 
-  handleInputChange = (e: { target: { value: any } }) => {
+  handleInputChange = (e: { target: { value: string } }) => {
     this.setState({
       text: e.target.value
     })
@@ -34,11 +39,22 @@ class TrelloActionButton extends React.Component<{ list?: boolean, dispatch: any
     const { dispatch } = this.props
     const { text } = this.state
 
-    if(text) {
+    if (text) {
       dispatch(addList(text))
     }
 
-    return;
+    return
+  }
+
+  handleAddCard = () => {
+    const { dispatch, listID } = this.props
+    const { text } = this.state
+
+    if (text && listID !== undefined) {
+      dispatch(addCard(listID, text))
+    }
+
+    return
   }
 
   renderAddButton = () => {
@@ -104,7 +120,7 @@ class TrelloActionButton extends React.Component<{ list?: boolean, dispatch: any
         </Card>
         <div style={styles.formButtonGroup}>
           <Button
-            onMouseDown={this.handleAddList}
+            onMouseDown={list ? this.handleAddList : this.handleAddCard}
             variant="contained"
             style={{
               color: 'white',
