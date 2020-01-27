@@ -47,7 +47,7 @@ class TrelloActionButton extends React.Component<{ list?: boolean }> {
           ...styles.openFormButtonGroup,
           opacity: buttonTextOpacity,
           color: buttonTextColor,
-          backgroundColor: buttonTextBackground
+          backgroundColor: buttonTextBackground,
         }}
       >
         <Icon>add</Icon>
@@ -71,7 +71,8 @@ class TrelloActionButton extends React.Component<{ list?: boolean }> {
             overflow: 'visivle',
             minHeight: 80,
             minWidth: 272,
-            padding: '6px 8px 2px'
+            padding: '6px 8px 2px',
+            marginTop: 8
           }}
         >
           <Textarea
