@@ -11,6 +11,7 @@ class TrelloActionButton extends React.Component<{
   list?: boolean
   dispatch: any
   listID?: number
+  cardID?: number
 }> {
   state = {
     formOpen: false,
@@ -47,11 +48,11 @@ class TrelloActionButton extends React.Component<{
   }
 
   handleAddCard = () => {
-    const { dispatch, listID } = this.props
+    const { dispatch, listID, cardID } = this.props
     const { text } = this.state
 
-    if (text && listID !== undefined) {
-      dispatch(addCard(listID, text))
+    if (text && listID !== undefined && cardID !== undefined) {
+      dispatch(addCard(listID, text, cardID))
     }
 
     return

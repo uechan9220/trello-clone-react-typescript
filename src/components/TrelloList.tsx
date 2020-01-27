@@ -11,7 +11,7 @@ const TrelloList: React.FC<TrelloListProps> = ({ title, cards, listID }) => {
       {cards.map(card => (
         <TrelloCard key={card.id} text={card.text} />
       ))}
-      <TrelloActionButton listID={listID} />
+      <TrelloActionButton listID={listID} cardID={cards.length} />
     </div>
   )
 }
