@@ -3,8 +3,10 @@ import Icon from '@material-ui/core/Icon'
 import Card from '@material-ui/core/Card'
 import Button from '@material-ui/core/Button'
 import Textarea from 'react-textarea-autosize'
+import { connect } from 'react-redux'
+import { addList } from '../actions/listsActions'
 
-class TrelloActionButton extends React.Component<{ list?: boolean }> {
+class TrelloActionButton extends React.Component<{ list?: boolean, dispatch: any }> {
   state = {
     formOpen: false,
     text: ''
@@ -28,6 +30,17 @@ class TrelloActionButton extends React.Component<{ list?: boolean }> {
     })
   }
 
+  handleAddList = () => {
+    const { dispatch } = this.props
+    const { text } = this.state
+
+    if(text) {
+      dispatch(addList(text))
+    }
+
+    return;
+  }
+
   renderAddButton = () => {
     const { list } = this.props
 
@@ -47,7 +60,7 @@ class TrelloActionButton extends React.Component<{ list?: boolean }> {
           ...styles.openFormButtonGroup,
           opacity: buttonTextOpacity,
           color: buttonTextColor,
-          backgroundColor: buttonTextBackground,
+          backgroundColor: buttonTextBackground
         }}
       >
         <Icon>add</Icon>
@@ -91,6 +104,7 @@ class TrelloActionButton extends React.Component<{ list?: boolean }> {
         </Card>
         <div style={styles.formButtonGroup}>
           <Button
+            onMouseDown={this.handleAddList}
             variant="contained"
             style={{
               color: 'white',
@@ -131,8 +145,8 @@ const styles = {
   formButtonGroup: {
     display: 'flex',
     alignItems: 'center',
-    marginTop: 8,
+    marginTop: 8
   }
 }
 
-export default TrelloActionButton
+export default connect()(TrelloActionButton)
