@@ -41,6 +41,9 @@ class TrelloActionButton extends React.Component<{
     const { text } = this.state
 
     if (text) {
+      this.setState({
+        text: ''
+      })
       dispatch(addList(text))
     }
 
@@ -52,10 +55,11 @@ class TrelloActionButton extends React.Component<{
     const { text } = this.state
 
     if (text && listID !== undefined && cardID !== undefined) {
+      this.setState({
+        text: ''
+      })
       dispatch(addCard(listID, text, cardID))
     }
-    //textArea value初期化
-    this.state.text = ''
 
     return
   }
