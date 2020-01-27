@@ -54,6 +54,8 @@ class TrelloActionButton extends React.Component<{
     if (text && listID !== undefined && cardID !== undefined) {
       dispatch(addCard(listID, text, cardID))
     }
+    //textArea value初期化
+    this.state.text = ''
 
     return
   }

@@ -46,7 +46,6 @@ const listsReducer = (
   state = initialState,
   action: { payload: any; type: any }
 ) => {
-  console.log(action)
   switch (action.type) {
     case CONSTANTS.ADD_LIST:
       const newList = {
