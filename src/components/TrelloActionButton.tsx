@@ -6,13 +6,9 @@ import Textarea from 'react-textarea-autosize'
 import { connect } from 'react-redux'
 import { addList } from '../actions/listsActions'
 import { addCard } from '../actions/cardsActions'
+import { TrelloActionsButtonProps } from '../interface/props'
 
-class TrelloActionButton extends React.Component<{
-  list?: boolean
-  dispatch: any
-  listID?: number
-  cardID?: number
-}> {
+class TrelloActionButton extends React.Component<TrelloActionsButtonProps> {
   state = {
     formOpen: false,
     text: ''

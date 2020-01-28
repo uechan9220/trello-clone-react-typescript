@@ -8,3 +8,10 @@ export interface TrelloListProps {
 export interface TrelloCardProps {
   text: string
 }
+
+export interface TrelloActionsButtonProps{
+  list?: boolean
+  dispatch: any
+  listID?: number
+  cardID?: number
+}
