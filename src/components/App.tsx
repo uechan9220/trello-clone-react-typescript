@@ -3,9 +3,32 @@ import TrelloList from './TrelloList'
 import { connect } from 'react-redux'
 import TrelloActionButton from './TrelloActionButton'
 import { DragDropContext } from 'react-beautiful-dnd'
+import { sort } from '../actions/listsActions'
+import styled from 'styled-components'
 
-class App extends React.Component<{ lists: [] }> {
-  onDragEnd = () => {}
+const ListContainer = styled.div`
+  display: felx;
+  flex-direction: row;
+`
+
+class App extends React.Component<{ lists: []; dispatch: any }> {
+  onDragEnd = (result: any) => {
+    const { destination, source, draggableId } = result
+
+    if (!destination) {
+      return
+    }
+
+    this.props.dispatch(
+      sort(
+        source.droppableId,
+        destination.droppableId,
+        source.index,
+        destination.index,
+        draggableId
+      )
+    )
+  }
 
   render() {
     const { lists } = this.props
@@ -13,7 +36,7 @@ class App extends React.Component<{ lists: [] }> {
       <DragDropContext onDragEnd={this.onDragEnd}>
         <div>
           <h1>hello</h1>
-          <div style={styles.listsContainer}>
+          <ListContainer>
             {lists.map(
               (list: {
                 id: number
@@ -29,7 +52,7 @@ class App extends React.Component<{ lists: [] }> {
               )
             )}
             <TrelloActionButton list />
-          </div>
+          </ListContainer>
         </div>
       </DragDropContext>
     )

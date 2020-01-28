@@ -56,7 +56,7 @@ const listsReducer = (
       listID++
       return [...state, newList]
 
-    case CONSTANTS.ADD_CARD:
+    case CONSTANTS.ADD_CARD: {
       let cardID = action.payload.cardID
       const newCard = {
         id: `list-${listID}-card-${cardID}`,
@@ -76,6 +76,23 @@ const listsReducer = (
       })
 
       return newState
+    }
+
+    case CONSTANTS.DRAG_HAPPENED:
+      const {
+        droppableIdStart,
+        droppableIdEnd,
+        droppableIndexStart,
+        droppableIndexEnd,
+        draggableId
+      } = action.payload
+      const newState = [...state]
+      if (droppableIdStart === droppableIdEnd) {
+        const list = state.find(list => droppableIdStart === list.id)
+        const card = list?.cards.splice(droppableIndexStart, 1)
+        if (card !== undefined)
+          list?.cards.splice(droppableIndexEnd, 0, ...card)
+      }
 
     default:
       return state

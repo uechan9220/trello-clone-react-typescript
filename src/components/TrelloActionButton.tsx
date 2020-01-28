@@ -104,6 +104,7 @@ class TrelloActionButton extends React.Component<TrelloActionsButtonProps> {
             minHeight: 85,
             minWidth: 272,
             padding: '6px 8px 2px',
+            margin: '6px 8px 2px',
             marginTop: 8
           }}
         >
