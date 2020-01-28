@@ -101,7 +101,7 @@ class TrelloActionButton extends React.Component<TrelloActionsButtonProps> {
         <Card
           style={{
             overflow: 'visivle',
-            minHeight: 80,
+            minHeight: 85,
             minWidth: 272,
             padding: '6px 8px 2px',
             marginTop: 8
@@ -117,7 +117,8 @@ class TrelloActionButton extends React.Component<TrelloActionsButtonProps> {
               resize: 'none',
               width: '100%',
               outline: 'none',
-              border: 'none'
+              border: 'none',
+              overflow: 'none'
             }}
           />
         </Card>

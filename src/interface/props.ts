@@ -7,6 +7,8 @@ export interface TrelloListProps {
 
 export interface TrelloCardProps {
   text: string
+  id: number
+  index: number
 }
 
 export interface TrelloActionsButtonProps{

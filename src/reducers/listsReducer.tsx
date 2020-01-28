@@ -6,36 +6,36 @@ let listID = 2
 const initialState = [
   {
     title: 'hoge',
-    id: 0,
+    id: `list-${0}`,
     cards: [
       {
-        id: 0,
+        id: `list-${0}-card-${0}`,
         text: 'we created a static list and static card'
       },
       {
-        id: 1,
+        id: `list-${0}-card-${1}`,
         text: 'we used a mix between material UI react and styled component'
       }
     ]
   },
   {
     title: 'fuga',
-    id: 1,
+    id: `list-${1}`,
     cards: [
       {
-        id: 0,
+        id: `list-${1}-card-${0}`,
         text: 'we will create our first reducer'
       },
       {
-        id: 1,
+        id: `list-${1}-card-${1}`,
         text: 'abd rander many cards on our list with static data'
       },
       {
-        id: 2,
+        id: `list-${1}-card-${2}`,
         text: 'hog ehogehoge hogehogehoge hogeho g ehogehoge wwwwwwwwww'
       },
       {
-        id: 3,
+        id: `list-${1}-card-${3}`,
         text: "I'm moke Trello clone with React in Typescript"
       }
     ]
@@ -51,7 +51,7 @@ const listsReducer = (
       const newList = {
         title: action.payload,
         cards: [],
-        id: listID
+        id: `list-${listID}`
       }
       listID++
       return [...state, newList]
@@ -59,7 +59,7 @@ const listsReducer = (
     case CONSTANTS.ADD_CARD:
       let cardID = action.payload.cardID
       const newCard = {
-        id: cardID,
+        id: `list-${listID}-card-${cardID}`,
         text: action.payload.text
       }
       cardID++
