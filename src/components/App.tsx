@@ -71,11 +71,6 @@ class App extends React.Component<{ lists: []; dispatch: any }> {
   }
 }
 
-const styles = {
-  listsContainer: {
-    display: 'flex'
-  }
-}
 
 const mapStateToProps = (state: { lists: [] }) => ({
   lists: state.lists

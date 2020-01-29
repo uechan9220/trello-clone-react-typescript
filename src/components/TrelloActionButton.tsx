@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { addList } from '../actions/listsActions'
 import { addCard } from '../actions/cardsActions'
 import { TrelloActionsButtonProps } from '../interface/props'
+import styled from 'styled-components'
 
 class TrelloActionButton extends React.Component<TrelloActionsButtonProps> {
   state = {
@@ -68,28 +69,39 @@ class TrelloActionButton extends React.Component<TrelloActionsButtonProps> {
     const buttonTextColor = list ? 'white' : 'inherit'
     const buttonTextBackground = list ? 'rgba(0,0,0,.15)' : 'inherit'
 
+    const OpenFormButtonGroup = styled.div`
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      border-radius: 3px;
+      height: 36px;
+      width: 272px;
+      padding-reft: 10px;
+      margin-top: 8px;
+      opacity: ${buttonTextOpacity};
+      color: ${buttonTextColor};
+      background-color: ${buttonTextBackground};
+    `
+
     return (
-      <div
-        /*
+      /*
         this.openForm()だとclickした時になんの処理を呼ぶかの関数を引数にわたすから
         渡す段階で実行してしまうとrenderのたんびにclick時点の操作が走ってしまうのでthis.openForm
-        */
-        onClick={this.openForm}
-        style={{
-          ...styles.openFormButtonGroup,
-          opacity: buttonTextOpacity,
-          color: buttonTextColor,
-          backgroundColor: buttonTextBackground
-        }}
-      >
+      */
+      <OpenFormButtonGroup onClick={this.openForm}>
         <Icon>add</Icon>
         <p>{buttonText}</p>
-      </div>
+      </OpenFormButtonGroup>
     )
   }
 
   renderForm = () => {
     const { list } = this.props
+    const FormButtonGroup = styled.div`
+      display: flex;
+      align-items: center;
+      margin-top: 8px;
+    `
 
     const placeholder = list
       ? 'Enter list title...'
@@ -123,7 +135,7 @@ class TrelloActionButton extends React.Component<TrelloActionsButtonProps> {
             }}
           />
         </Card>
-        <div style={styles.formButtonGroup}>
+        <FormButtonGroup>
           <Button
             onMouseDown={list ? this.handleAddList : this.handleAddCard}
             variant="contained"
@@ -142,31 +154,13 @@ class TrelloActionButton extends React.Component<TrelloActionsButtonProps> {
           >
             close
           </Icon>
-        </div>
+        </FormButtonGroup>
       </div>
     )
   }
 
   render() {
     return this.state.formOpen ? this.renderForm() : this.renderAddButton()
-  }
-}
-
-const styles = {
-  openFormButtonGroup: {
-    display: 'flex',
-    alignItems: 'center',
-    cursor: 'pointer',
-    borderRadius: 3,
-    height: 36,
-    width: 272,
-    paddingLeft: 10,
-    marginTop: 8
-  },
-  formButtonGroup: {
-    display: 'flex',
-    alignItems: 'center',
-    marginTop: 8
   }
 }
 
