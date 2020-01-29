@@ -94,6 +94,16 @@ const listsReducer = (
           list?.cards.splice(droppableIndexEnd, 0, ...card)
       }
 
+      if (droppableIdStart !== droppableIdEnd) {
+        const listStart = state.find(list => droppableIdStart === list.id)
+        const card = listStart?.cards.splice(droppableIndexStart, 1)
+        const listEnd = state.find(list => droppableIdEnd === list.id)
+        if (card !== undefined)
+          listEnd?.cards.splice(droppableIndexEnd, 0, ...card)
+      }
+
+      return newState
+
     default:
       return state
   }
