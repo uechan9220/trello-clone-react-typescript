@@ -3,6 +3,7 @@ export interface TrelloListProps {
   key: number
   title: string
   cards: [{ id: number; text: string }]
+  index: number
 }
 
 export interface TrelloCardProps {

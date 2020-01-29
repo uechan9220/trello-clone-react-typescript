@@ -2,8 +2,9 @@ import * as React from 'react'
 import { TrelloListProps } from '../interface/props'
 import TrelloCard from './TrelloCard'
 import TrelloActionButton from './TrelloActionButton'
-import { Droppable } from 'react-beautiful-dnd'
+import { Droppable, Draggable } from 'react-beautiful-dnd'
 import styled from 'styled-components'
+import { Provider } from 'react-redux'
 
 const ListContainer = styled.div`
   background-color: #dfe3e6;
@@ -14,26 +15,41 @@ const ListContainer = styled.div`
   height: 100%;
 `
 
-const TrelloList: React.FC<TrelloListProps> = ({ title, cards, listID }) => {
+const TrelloList: React.FC<TrelloListProps> = ({
+  title,
+  cards,
+  listID,
+  index
+}) => {
   console.log(cards)
   return (
-    <Droppable droppableId={String(listID)}>
+    <Draggable draggableId={String(listID)} index={index}>
       {provided => (
-        <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
-          <h4>{title}</h4>
-          {cards.map((card, index) => (
-            <TrelloCard
-              key={card.id}
-              index={index}
-              text={card.text}
-              id={card.id}
-            />
-          ))}
-          <TrelloActionButton listID={listID} cardID={cards.length} />
-          {provided.placeholder}
+        <ListContainer
+          {...provided.draggableProps}
+          ref={provided.innerRef}
+          {...provided.dragHandleProps}
+        >
+          <Droppable droppableId={String(listID)}>
+            {provided => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                <h4>{title}</h4>
+                {cards.map((card, index) => (
+                  <TrelloCard
+                    key={card.id}
+                    index={index}
+                    text={card.text}
+                    id={card.id}
+                  />
+                ))}
+                <TrelloActionButton listID={listID} cardID={cards.length} />
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
         </ListContainer>
       )}
-    </Droppable>
+    </Draggable>
   )
 }
 

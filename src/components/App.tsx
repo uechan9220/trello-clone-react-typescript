@@ -13,7 +13,7 @@ const ListContainer = styled.div`
 
 class App extends React.Component<{ lists: []; dispatch: any }> {
   onDragEnd = (result: any) => {
-    const { destination, source, draggableId } = result
+    const { destination, source, draggableId, type } = result
 
     if (!destination) {
       return
@@ -25,7 +25,8 @@ class App extends React.Component<{ lists: []; dispatch: any }> {
         destination.droppableId,
         source.index,
         destination.index,
-        draggableId
+        draggableId,
+        type
       )
     )
   }
@@ -43,16 +44,20 @@ class App extends React.Component<{ lists: []; dispatch: any }> {
                 ref={provided.innerRef}
               >
                 {lists.map(
-                  (list: {
-                    id: number
-                    title: string
-                    cards: [{ id: number; text: string }]
-                  }) => (
+                  (
+                    list: {
+                      id: number
+                      title: string
+                      cards: [{ id: number; text: string }]
+                    },
+                    index
+                  ) => (
                     <TrelloList
                       listID={list.id}
                       key={list.id}
                       title={list.title}
                       cards={list.cards}
+                      index={index}
                     />
                   )
                 )}
