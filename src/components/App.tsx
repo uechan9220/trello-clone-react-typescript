@@ -35,7 +35,6 @@ class App extends React.Component<{ lists: []; dispatch: any }> {
     const { lists } = this.props
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <div>
           <h2>hello</h2>
           <Droppable droppableId="all-lists" direction="horizontal" type="list">
             {provided => (
@@ -61,11 +60,11 @@ class App extends React.Component<{ lists: []; dispatch: any }> {
                     />
                   )
                 )}
+                {provided.placeholder}
                 <TrelloActionButton list />
               </ListContainer>
             )}
           </Droppable>
-        </div>
       </DragDropContext>
     )
   }
